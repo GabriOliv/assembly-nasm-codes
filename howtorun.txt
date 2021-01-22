@@ -1,0 +1,22 @@
+================
+[Assembly Guide]
+================
+Extension .asm
+
+--------------
+[Compile]
+----------------
+
+Install nasm
+
+1. compile
+nasm -f elf64 program.asm
+
+2. link
+ld program.o -o program
+
+3. execute
+./program
+
+----------------
+
