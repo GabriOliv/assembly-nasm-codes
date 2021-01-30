@@ -1,22 +1,23 @@
-================
-[Assembly Guide]
-================
+Assembly HOW TO RUN Guide
 Extension .asm
 
---------------
-[Compile]
-----------------
 
-Install nasm
+[Compile Process]
 
-1. compile
+-------------------------------------------
+0. Install nasm
+
+https://www.nasm.us/
+-------------------------------------------
+1. mount
+
 nasm -f elf64 program.asm
-
+-------------------------------------------
 2. link
+
 ld program.o -o program
-
+-------------------------------------------
 3. execute
+
 ./program
-
-----------------
-
+-------------------------------------------
