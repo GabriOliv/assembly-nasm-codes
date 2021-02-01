@@ -15,3 +15,6 @@ Listagem dos Scripts do repositório
 | 007_1_Macro_Lib.asm | Biblioteca de Macros | Biblioteca de Macros chamada pelo Script "007_0_Macro_Extern" |
 | 008_Input_Validation.asm | Soma de Dois Números | Validação de Entrada usando Pilha (push, pop) |
 | 009_Open_File.asm |  |  |
+| 010_Write_File.asm |  |  |
+| 011_Copy_File.asm |  |  |
+
