@@ -14,7 +14,7 @@ Listagem dos Scripts do repositório
 | 007_0_Macro_Extern.asm | Retorna se é Par ou Impar | Chamada de Macro externo ao arquivo (%include) |
 | 007_1_Macro_Lib.asm | Biblioteca de Macros | Biblioteca de Macros chamada pelo Script "007_0_Macro_Extern" |
 | 008_Input_Validation.asm | Soma de Dois Números | Validação de Entrada usando Pilha (push, pop) |
-| 009_Open_File.asm |  |  |
-| 010_Write_File.asm |  |  |
-| 011_Copy_File.asm |  |  |
+| 009_Open_File.asm | Retorna Conteúdo do Arquivo | Syscall 5 (open)  |
+| 010_Write_File.asm | Salva entrada do usuário Dentro do Arquivo  | Syscall 8 (creat) |
+| 011_Copy_File.asm | Copia conteúdo de um Arquivo para Outro | --- |
 
