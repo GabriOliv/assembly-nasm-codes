@@ -17,4 +17,4 @@ Listagem dos Scripts do repositório
 | 009_Open_File.asm | Retorna Conteúdo do Arquivo | Syscall 5 (open)  |
 | 010_Write_File.asm | Salva entrada do usuário Dentro do Arquivo  | Syscall 8 (creat) |
 | 011_Copy_File.asm | Copia conteúdo de um Arquivo para Outro | --- |
-
+| 012_Uppercase.asm | Capitaliza Texto de Input | Uso dos Macros em Library |
