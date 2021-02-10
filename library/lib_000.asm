@@ -2,10 +2,10 @@
 ; https://www.nasm.us/doc/nasmdoc4.html
 ; Include List:
 
-; %include "lib_001.asm"
+%include "library/lib_001.asm"
 ; %include "lib_002.asm"
-; %include "lib_003.asm"
-; %include "lib_004.asm"
+%include "library/lib_003.asm"
+%include "library/lib_004.asm"
 ; %include "lib_005.asm"
 ; %include "lib_006.asm"
 ; %include "lib_007.asm"
