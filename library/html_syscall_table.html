@@ -1,0 +1,733 @@
+<html><head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+	<title>Syscall x86 Linux ASM</title>
+
+	<!-- Require Web Access to Download the Bootstrap Libs-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+</head>
+
+
+<body class="bg-dark">
+	<div class='container col-xs-4 p-1 my-3 bg-secondary text-center'>
+		<h1>
+			<a href="" style="color: black; text-decoration: none;">Syscall x86 Linux ASM</a>
+		</h1>
+	</div>
+
+	<div class='container col-xs-4 p-1 my-3 bg-secondary text-center'>
+		<h5>
+			<a href="https://syscalls.w3challs.com/" target="_blank" style="color: black; text-decoration: none;">Extracted from W3Challs Syscalls</a>
+		</h5>
+	</div>
+
+	<table class="table table-dark table-striped" cellpadding="0" cellspacing="0" border="0" class="display" id="syscall_table">
+
+		<thead>
+			<tr role="row"><th rowspan="2" class="ui-state-default" role="columnheader" tabindex="0" aria-controls="syscall_table" colspan="1" style="width: 31px;" aria-sort="ascending" aria-label="#: activate to sort column descending"><div class="DataTables_sort_wrapper">#<span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span></div></th><th rowspan="2" class="ui-state-default" role="columnheader" tabindex="0" aria-controls="syscall_table" colspan="1" style="width: 192px;" aria-label="Name: activate to sort column ascending"><div class="DataTables_sort_wrapper">Name<span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th><th colspan="7" class="ui-state-default" rowspan="1">Registers</th><th rowspan="2" class="ui-state-default" role="columnheader" tabindex="0" aria-controls="syscall_table" colspan="1" style="width: 237px;" aria-label="Definition: activate to sort column ascending"><div class="DataTables_sort_wrapper">Definition<span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th></tr>
+			<tr role="row"><th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="syscall_table" rowspan="1" colspan="1" style="width: 50px;" aria-label="eax: activate to sort column ascending"><div class="DataTables_sort_wrapper">eax<span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th><th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="syscall_table" rowspan="1" colspan="1" style="width: 205px;" aria-label="ebx: activate to sort column ascending"><div class="DataTables_sort_wrapper">ebx<span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th><th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="syscall_table" rowspan="1" colspan="1" style="width: 221px;" aria-label="ecx: activate to sort column ascending"><div class="DataTables_sort_wrapper">ecx<span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th><th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="syscall_table" rowspan="1" colspan="1" style="width: 218px;" aria-label="edx: activate to sort column ascending"><div class="DataTables_sort_wrapper">edx<span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th><th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="syscall_table" rowspan="1" colspan="1" style="width: 182px;" aria-label="esi: activate to sort column ascending"><div class="DataTables_sort_wrapper">esi<span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th><th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="syscall_table" rowspan="1" colspan="1" style="width: 230px;" aria-label="edi: activate to sort column ascending"><div class="DataTables_sort_wrapper">edi<span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th><th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="syscall_table" rowspan="1" colspan="1" style="width: 125px;" aria-label="ebp: activate to sort column ascending"><div class="DataTables_sort_wrapper">ebp<span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th></tr>
+		</thead>
+	
+		<tbody role="alert" aria-live="polite" aria-relevant="all">
+
+			<tr><td>0</td><td><a>restart_syscall</a></td><td>0x00</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/signal.c:2501</a></td></tr>
+
+			<tr><td>1</td><td><a>exit</a></td><td>0x01</td><td>int error_code</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/exit.c:1095</a></td></tr>
+
+			<tr><td>2</td><td><a>fork</a></td><td>0x02</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/process.c:271</a></td></tr>
+
+			<tr><td>3</td><td><a>read</a></td><td>0x03</td><td>unsigned int fd</td><td>char *buf</td><td>size_t count</td><td>-</td><td>-</td><td>-</td><td><a>fs/read_write.c:460</a></td></tr>
+
+			<tr><td>4</td><td><a>write</a></td><td>0x04</td><td>unsigned int fd</td><td>const char *buf</td><td>size_t count</td><td>-</td><td>-</td><td>-</td><td><a>fs/read_write.c:477</a></td></tr>
+
+			<tr><td>5</td><td><a>open</a></td><td>0x05</td><td>const char *filename</td><td>int flags</td><td>umode_t mode</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:1046</a></td></tr>
+
+			<tr><td>6</td><td><a>close</a></td><td>0x06</td><td>unsigned int fd</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:1117</a></td></tr>
+
+			<tr><td>7</td><td><a>waitpid</a></td><td>0x07</td><td>pid_t pid</td><td>int *stat_addr</td><td>int options</td><td>-</td><td>-</td><td>-</td><td><a>kernel/exit.c:1879</a></td></tr>
+
+			<tr><td>8</td><td><a>creat</a></td><td>0x08</td><td>const char *pathname</td><td>umode_t mode</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:1079</a></td></tr>
+
+			<tr><td>9</td><td><a>link</a></td><td>0x09</td><td>const char *oldname</td><td>const char *newname</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/namei.c:3152</a></td></tr>
+
+			<tr><td>10</td><td><a>unlink</a></td><td>0x0a</td><td>const char *pathname</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/namei.c:2979</a></td></tr>
+
+			<tr><td>11</td><td><a>execve</a></td><td>0x0b</td><td>const char *name</td><td>const char *const *argv</td><td>const char *const *envp</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/process.c:342</a></td></tr>
+
+			<tr><td>12</td><td><a>chdir</a></td><td>0x0c</td><td>const char *filename</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:375</a></td></tr>
+
+			<tr><td>13</td><td><a>time</a></td><td>0x0d</td><td>time_t *tloc</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/time.c:62</a></td></tr>
+
+			<tr><td>14</td><td><a>mknod</a></td><td>0x0e</td><td>const char *filename</td><td>umode_t mode</td><td>unsigned dev</td><td>-</td><td>-</td><td>-</td><td><a>fs/namei.c:2693</a></td></tr>
+
+			<tr><td>15</td><td><a>chmod</a></td><td>0x0f</td><td>const char *filename</td><td>umode_t mode</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:499</a></td></tr>
+
+			<tr><td>16</td><td><a>lchown</a></td><td>0x10</td><td>const char *filename</td><td>uid_t user</td><td>gid_t group</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:586</a></td></tr>
+
+			<tr><td>17</td><td><a>break</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>18</td><td><a>oldstat</a></td><td>0x12</td><td>const char *filename</td><td><a>struct __old_kernel_stat</a> *statbuf</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/stat.c:155</a></td></tr>
+
+			<tr><td>19</td><td><a>lseek</a></td><td>0x13</td><td>unsigned int fd</td><td>off_t offset</td><td>unsigned int origin</td><td>-</td><td>-</td><td>-</td><td><a>fs/read_write.c:230</a></td></tr>
+
+			<tr><td>20</td><td><a>getpid</a></td><td>0x14</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/timer.c:1413</a></td></tr>
+
+			<tr><td>21</td><td><a>mount</a></td><td>0x15</td><td>char *dev_name</td><td>char *dir_name</td><td>char *type</td><td>unsigned long flags</td><td>void *data</td><td>-</td><td><a>fs/namespace.c:2362</a></td></tr>
+
+			<tr><td>22</td><td><a>umount</a></td><td>0x16</td><td>char *name</td><td>int flags</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/namespace.c:1190</a></td></tr>
+
+			<tr><td>23</td><td><a>setuid</a></td><td>0x17</td><td>uid_t uid</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:761</a></td></tr>
+
+			<tr><td>24</td><td><a>getuid</a></td><td>0x18</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/timer.c:1435</a></td></tr>
+
+			<tr><td>25</td><td><a>stime</a></td><td>0x19</td><td>time_t *tptr</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/time.c:81</a></td></tr>
+
+			<tr><td>26</td><td><a>ptrace</a></td><td>0x1a</td><td>long request</td><td>long pid</td><td>unsigned long addr</td><td>unsigned long data</td><td>-</td><td>-</td><td><a>kernel/ptrace.c:857</a></td></tr>
+
+			<tr><td>27</td><td><a>alarm</a></td><td>0x1b</td><td>unsigned int seconds</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/timer.c:1390</a></td></tr>
+
+			<tr><td>28</td><td><a>oldfstat</a></td><td>0x1c</td><td>unsigned int fd</td><td><a>struct __old_kernel_stat</a> *statbuf</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/stat.c:181</a></td></tr>
+
+			<tr><td>29</td><td><a>pause</a></td><td>0x1d</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/signal.c:3245</a></td></tr>
+
+			<tr><td>30</td><td><a>utime</a></td><td>0x1e</td><td>char *filename</td><td><a>struct utimbuf</a> *times</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/utimes.c:27</a></td></tr>
+
+			<tr><td>31</td><td><a>stty</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>32</td><td><a>gtty</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>33</td><td><a>access</a></td><td>0x21</td><td>const char *filename</td><td>int mode</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:370</a></td></tr>
+
+			<tr><td>34</td><td><a>nice</a></td><td>0x22</td><td>int increment</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sched/core.c:4119</a></td></tr>
+
+			<tr><td>35</td><td><a>ftime</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>36</td><td><a>sync</a></td><td>0x24</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/sync.c:98</a></td></tr>
+
+			<tr><td>37</td><td><a>kill</a></td><td>0x25</td><td>pid_t pid</td><td>int sig</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/signal.c:2841</a></td></tr>
+
+			<tr><td>38</td><td><a>rename</a></td><td>0x26</td><td>const char *oldname</td><td>const char *newname</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/namei.c:3403</a></td></tr>
+
+			<tr><td>39</td><td><a>mkdir</a></td><td>0x27</td><td>const char *pathname</td><td>umode_t mode</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/namei.c:2751</a></td></tr>
+
+			<tr><td>40</td><td><a>rmdir</a></td><td>0x28</td><td>const char *pathname</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/namei.c:2870</a></td></tr>
+
+			<tr><td>41</td><td><a>dup</a></td><td>0x29</td><td>unsigned int fildes</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/fcntl.c:131</a></td></tr>
+
+			<tr><td>42</td><td><a>pipe</a></td><td>0x2a</td><td>int *fildes</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/pipe.c:1149</a></td></tr>
+
+			<tr><td>43</td><td><a>times</a></td><td>0x2b</td><td><a>struct tms</a> *tbuf</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1058</a></td></tr>
+
+			<tr><td>44</td><td><a>prof</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>45</td><td><a>brk</a></td><td>0x2d</td><td>unsigned long brk</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>mm/mmap.c:246</a></td></tr>
+
+			<tr><td>46</td><td><a>setgid</a></td><td>0x2e</td><td>gid_t gid</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:614</a></td></tr>
+
+			<tr><td>47</td><td><a>getgid</a></td><td>0x2f</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/timer.c:1447</a></td></tr>
+
+			<tr><td>48</td><td><a>signal</a></td><td>0x30</td><td>int sig</td><td>__sighandler_t handler</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/signal.c:3228</a></td></tr>
+
+			<tr><td>49</td><td><a>geteuid</a></td><td>0x31</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/timer.c:1441</a></td></tr>
+
+			<tr><td>50</td><td><a>getegid</a></td><td>0x32</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/timer.c:1453</a></td></tr>
+
+			<tr><td>51</td><td><a>acct</a></td><td>0x33</td><td>const char *name</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/acct.c:255</a></td></tr>
+
+			<tr><td>52</td><td><a>umount2</a></td><td>0x34</td><td>char *name</td><td>int flags</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/namespace.c:1190</a></td></tr>
+
+			<tr><td>53</td><td><a>lock</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>54</td><td><a>ioctl</a></td><td>0x36</td><td>unsigned int fd</td><td>unsigned int cmd</td><td>unsigned long arg</td><td>-</td><td>-</td><td>-</td><td><a>fs/ioctl.c:604</a></td></tr>
+
+			<tr><td>55</td><td><a>fcntl</a></td><td>0x37</td><td>unsigned int fd</td><td>unsigned int cmd</td><td>unsigned long arg</td><td>-</td><td>-</td><td>-</td><td><a>fs/fcntl.c:442</a></td></tr>
+
+			<tr><td>56</td><td><a>mpx</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>57</td><td><a>setpgid</a></td><td>0x39</td><td>pid_t pid</td><td>pid_t pgid</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1083</a></td></tr>
+
+			<tr><td>58</td><td><a>ulimit</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>59</td><td><a>oldolduname</a></td><td>0x3b</td><td><a>struct oldold_utsname</a> *name</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1330</a></td></tr>
+
+			<tr><td>60</td><td><a>umask</a></td><td>0x3c</td><td>int mask</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1782</a></td></tr>
+
+			<tr><td>61</td><td><a>chroot</a></td><td>0x3d</td><td>const char *filename</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:422</a></td></tr>
+
+			<tr><td>62</td><td><a>ustat</a></td><td>0x3e</td><td>unsigned dev</td><td><a>struct ustat</a> *ubuf</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/statfs.c:222</a></td></tr>
+
+			<tr><td>63</td><td><a>dup2</a></td><td>0x3f</td><td>unsigned int oldfd</td><td>unsigned int newfd</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/fcntl.c:116</a></td></tr>
+
+			<tr><td>64</td><td><a>getppid</a></td><td>0x40</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/timer.c:1424</a></td></tr>
+
+			<tr><td>65</td><td><a>getpgrp</a></td><td>0x41</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1184</a></td></tr>
+
+			<tr><td>66</td><td><a>setsid</a></td><td>0x42</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1219</a></td></tr>
+
+			<tr><td>67</td><td><a>sigaction</a></td><td>0x43</td><td>int sig</td><td>const <a>struct old_sigaction</a> *act</td><td><a>struct old_sigaction</a> *oact</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/signal.c:487</a></td></tr>
+
+			<tr><td>68</td><td><a>sgetmask</a></td><td>0x44</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/signal.c:3207</a></td></tr>
+
+			<tr><td>69</td><td><a>ssetmask</a></td><td>0x45</td><td>int newmask</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/signal.c:3213</a></td></tr>
+
+			<tr><td>70</td><td><a>setreuid</a></td><td>0x46</td><td>uid_t ruid</td><td>uid_t euid</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:690</a></td></tr>
+
+			<tr><td>71</td><td><a>setregid</a></td><td>0x47</td><td>gid_t rgid</td><td>gid_t egid</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:557</a></td></tr>
+
+			<tr><td>72</td><td><a>sigsuspend</a></td><td>0x48</td><td>int history0</td><td>int history1</td><td>old_sigset_t mask</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/signal.c:479</a></td></tr>
+
+			<tr><td>73</td><td><a>sigpending</a></td><td>0x49</td><td>old_sigset_t *set</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/signal.c:3107</a></td></tr>
+
+			<tr><td>74</td><td><a>sethostname</a></td><td>0x4a</td><td>char *name</td><td>int len</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1365</a></td></tr>
+
+			<tr><td>75</td><td><a>setrlimit</a></td><td>0x4b</td><td>unsigned int resource</td><td><a>struct rlimit</a> *rlim</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1641</a></td></tr>
+
+			<tr><td>76</td><td><a>getrlimit</a></td><td>0x4c</td><td>unsigned int resource</td><td><a>struct rlimit</a> *rlim</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1440</a></td></tr>
+
+			<tr><td>77</td><td><a>getrusage</a></td><td>0x4d</td><td>int who</td><td><a>struct rusage</a> *ru</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1774</a></td></tr>
+
+			<tr><td>78</td><td><a>gettimeofday</a></td><td>0x4e</td><td><a>struct timeval</a> *tv</td><td><a>struct timezone</a> *tz</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/time.c:101</a></td></tr>
+
+			<tr><td>79</td><td><a>settimeofday</a></td><td>0x4f</td><td><a>struct timeval</a> *tv</td><td><a>struct timezone</a> *tz</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/time.c:179</a></td></tr>
+
+			<tr><td>80</td><td><a>getgroups</a></td><td>0x50</td><td>int gidsetsize</td><td>gid_t *grouplist</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/groups.c:202</a></td></tr>
+
+			<tr><td>81</td><td><a>setgroups</a></td><td>0x51</td><td>int gidsetsize</td><td>gid_t *grouplist</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/groups.c:231</a></td></tr>
+
+			<tr><td>82</td><td><a>select</a></td><td>0x52</td><td>int n</td><td>fd_set *inp</td><td>fd_set *outp</td><td>fd_set *exp</td><td><a>struct timeval</a> *tvp</td><td>-</td><td><a>fs/select.c:593</a></td></tr>
+
+			<tr><td>83</td><td><a>symlink</a></td><td>0x53</td><td>const char *oldname</td><td>const char *newname</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/namei.c:3039</a></td></tr>
+
+			<tr><td>84</td><td><a>oldlstat</a></td><td>0x54</td><td>const char *filename</td><td><a>struct __old_kernel_stat</a> *statbuf</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/stat.c:168</a></td></tr>
+
+			<tr><td>85</td><td><a>readlink</a></td><td>0x55</td><td>const char *path</td><td>char *buf</td><td>int bufsiz</td><td>-</td><td>-</td><td>-</td><td><a>fs/stat.c:321</a></td></tr>
+
+			<tr><td>86</td><td><a>uselib</a></td><td>0x56</td><td>const char *library</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/exec.c:116</a></td></tr>
+
+			<tr><td>87</td><td><a>swapon</a></td><td>0x57</td><td>const char *specialfile</td><td>int swap_flags</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>mm/swapfile.c:1996</a></td></tr>
+
+			<tr><td>88</td><td><a>reboot</a></td><td>0x58</td><td>int magic1</td><td>int magic2</td><td>unsigned int cmd</td><td>void *arg</td><td>-</td><td>-</td><td><a>kernel/sys.c:432</a></td></tr>
+
+			<tr><td>89</td><td><a>readdir</a></td><td>0x59</td><td>unsigned int fd</td><td><a>struct old_linux_dirent</a> *dirent</td><td>unsigned int count</td><td>-</td><td>-</td><td>-</td><td><a>fs/readdir.c:105</a></td></tr>
+
+			<tr><td>90</td><td><a>mmap</a></td><td>0x5a</td><td>unsigned long addr</td><td>unsigned long len</td><td>unsigned long prot</td><td>unsigned long flags</td><td>unsigned long fd</td><td>unsigned long off</td><td><a>arch/x86/kernel/sys_x86_64.c:84</a></td></tr>
+
+			<tr><td>91</td><td><a>munmap</a></td><td>0x5b</td><td>unsigned long addr</td><td>size_t len</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>mm/mmap.c:2141</a></td></tr>
+
+			<tr><td>92</td><td><a>truncate</a></td><td>0x5c</td><td>const char *path</td><td>long length</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:128</a></td></tr>
+
+			<tr><td>93</td><td><a>ftruncate</a></td><td>0x5d</td><td>unsigned int fd</td><td>unsigned long length</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:178</a></td></tr>
+
+			<tr><td>94</td><td><a>fchmod</a></td><td>0x5e</td><td>unsigned int fd</td><td>umode_t mode</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:472</a></td></tr>
+
+			<tr><td>95</td><td><a>fchown</a></td><td>0x5f</td><td>unsigned int fd</td><td>uid_t user</td><td>gid_t group</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:605</a></td></tr>
+
+			<tr><td>96</td><td><a>getpriority</a></td><td>0x60</td><td>int which</td><td>int who</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:241</a></td></tr>
+
+			<tr><td>97</td><td><a>setpriority</a></td><td>0x61</td><td>int which</td><td>int who</td><td>int niceval</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:172</a></td></tr>
+
+			<tr><td>98</td><td><a>profil</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>99</td><td><a>statfs</a></td><td>0x63</td><td>const char *pathname</td><td><a>struct statfs</a> *buf</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/statfs.c:166</a></td></tr>
+
+			<tr><td>100</td><td><a>fstatfs</a></td><td>0x64</td><td>unsigned int fd</td><td><a>struct statfs</a> *buf</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/statfs.c:187</a></td></tr>
+
+			<tr><td>101</td><td><a>ioperm</a></td><td>0x65</td><td>unsigned long from</td><td>unsigned long num</td><td>int turn_on</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/ioport.c:23</a></td></tr>
+
+			<tr><td>102</td><td><a>socketcall</a></td><td>0x66</td><td>int call</td><td>unsigned long *args</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>net/socket.c:2355</a></td></tr>
+
+			<tr><td>103</td><td><a>syslog</a></td><td>0x67</td><td>int type</td><td>char *buf</td><td>int len</td><td>-</td><td>-</td><td>-</td><td><a>kernel/printk.c:1195</a></td></tr>
+
+			<tr><td>104</td><td><a>setitimer</a></td><td>0x68</td><td>int which</td><td><a>struct itimerval</a> *value</td><td><a>struct itimerval</a> *ovalue</td><td>-</td><td>-</td><td>-</td><td><a>kernel/itimer.c:278</a></td></tr>
+
+			<tr><td>105</td><td><a>getitimer</a></td><td>0x69</td><td>int which</td><td><a>struct itimerval</a> *value</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/itimer.c:103</a></td></tr>
+
+			<tr><td>106</td><td><a>stat</a></td><td>0x6a</td><td>const char *filename</td><td><a>struct __old_kernel_stat</a> *statbuf</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/stat.c:155</a></td></tr>
+
+			<tr><td>107</td><td><a>lstat</a></td><td>0x6b</td><td>const char *filename</td><td><a>struct __old_kernel_stat</a> *statbuf</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/stat.c:168</a></td></tr>
+
+			<tr><td>108</td><td><a>fstat</a></td><td>0x6c</td><td>unsigned int fd</td><td><a>struct __old_kernel_stat</a> *statbuf</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/stat.c:181</a></td></tr>
+
+			<tr><td>109</td><td><a>olduname</a></td><td>0x6d</td><td><a>struct oldold_utsname</a> *name</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1330</a></td></tr>
+
+			<tr><td>110</td><td><a>iopl</a></td><td>0x6e</td><td>unsigned int level</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/ioport.c:96</a></td></tr>
+
+			<tr><td>111</td><td><a>vhangup</a></td><td>0x6f</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:1156</a></td></tr>
+
+			<tr><td>112</td><td><a>idle</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>113</td><td><a>vm86old</a></td><td>0x71</td><td><a>struct vm86_struct</a> *v86</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/vm86_32.c:203</a></td></tr>
+
+			<tr><td>114</td><td><a>wait4</a></td><td>0x72</td><td>pid_t upid</td><td>int *stat_addr</td><td>int options</td><td><a>struct rusage</a> *ru</td><td>-</td><td>-</td><td><a>kernel/exit.c:1834</a></td></tr>
+
+			<tr><td>115</td><td><a>swapoff</a></td><td>0x73</td><td>const char *specialfile</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>mm/swapfile.c:1539</a></td></tr>
+
+			<tr><td>116</td><td><a>sysinfo</a></td><td>0x74</td><td><a>struct sysinfo</a> *info</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/timer.c:1641</a></td></tr>
+
+			<tr><td>117</td><td><a>ipc</a></td><td>0x75</td><td>unsigned int call</td><td>int first</td><td>unsigned long second</td><td>unsigned long third</td><td>void *ptr</td><td>long fifth</td><td><a>ipc/syscall.c:16</a></td></tr>
+
+			<tr><td>118</td><td><a>fsync</a></td><td>0x76</td><td>unsigned int fd</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/sync.c:201</a></td></tr>
+
+			<tr><td>119</td><td><a>sigreturn</a></td><td>0x77</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/signal.c:543</a></td></tr>
+
+			<tr><td>120</td><td><a>clone</a></td><td>0x78</td><td>unsigned long clone_flags</td><td>unsigned long newsp</td><td>void *parent_tid</td><td>void *child_tid</td><td>-</td><td>-</td><td><a>arch/x86/kernel/process.c:293</a></td></tr>
+
+			<tr><td>121</td><td><a>setdomainname</a></td><td>0x79</td><td>char *name</td><td>int len</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1416</a></td></tr>
+
+			<tr><td>122</td><td><a>uname</a></td><td>0x7a</td><td><a>struct old_utsname</a> *name</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1311</a></td></tr>
+
+			<tr><td>123</td><td><a>modify_ldt</a></td><td>0x7b</td><td>int func</td><td>void *ptr</td><td>unsigned long bytecount</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/ldt.c:247</a></td></tr>
+
+			<tr><td>124</td><td><a>adjtimex</a></td><td>0x7c</td><td><a>struct timex</a> *txc_p</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/time.c:200</a></td></tr>
+
+			<tr><td>125</td><td><a>mprotect</a></td><td>0x7d</td><td>unsigned long start</td><td>size_t len</td><td>unsigned long prot</td><td>-</td><td>-</td><td>-</td><td><a>mm/mprotect.c:232</a></td></tr>
+
+			<tr><td>126</td><td><a>sigprocmask</a></td><td>0x7e</td><td>int how</td><td>old_sigset_t *nset</td><td>old_sigset_t *oset</td><td>-</td><td>-</td><td>-</td><td><a>kernel/signal.c:3125</a></td></tr>
+
+			<tr><td>127</td><td><a>create_module</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>128</td><td><a>init_module</a></td><td>0x80</td><td>void *umod</td><td>unsigned long len</td><td>const char *uargs</td><td>-</td><td>-</td><td>-</td><td><a>kernel/module.c:3010</a></td></tr>
+
+			<tr><td>129</td><td><a>delete_module</a></td><td>0x81</td><td>const char *name_user</td><td>unsigned int flags</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/module.c:768</a></td></tr>
+
+			<tr><td>130</td><td><a>get_kernel_syms</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>131</td><td><a>quotactl</a></td><td>0x83</td><td>unsigned int cmd</td><td>const char *special</td><td>qid_t id</td><td>void *addr</td><td>-</td><td>-</td><td><a>fs/quota/quota.c:346</a></td></tr>
+
+			<tr><td>132</td><td><a>getpgid</a></td><td>0x84</td><td>pid_t pid</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1154</a></td></tr>
+
+			<tr><td>133</td><td><a>fchdir</a></td><td>0x85</td><td>unsigned int fd</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:396</a></td></tr>
+
+			<tr><td>134</td><td><a>bdflush</a></td><td>0x86</td><td>int func</td><td>long data</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/buffer.c:3130</a></td></tr>
+
+			<tr><td>135</td><td><a>sysfs</a></td><td>0x87</td><td>int option</td><td>unsigned long arg1</td><td>unsigned long arg2</td><td>-</td><td>-</td><td>-</td><td><a>fs/filesystems.c:183</a></td></tr>
+
+			<tr><td>136</td><td><a>personality</a></td><td>0x88</td><td>unsigned int personality</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/exec_domain.c:182</a></td></tr>
+
+			<tr><td>137</td><td><a>afs_syscall</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>138</td><td><a>setfsuid</a></td><td>0x8a</td><td>uid_t uid</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:969</a></td></tr>
+
+			<tr><td>139</td><td><a>setfsgid</a></td><td>0x8b</td><td>gid_t gid</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1008</a></td></tr>
+
+			<tr><td>140</td><td><a>_llseek</a></td><td>0x8c</td><td>unsigned int fd</td><td>unsigned long offset_high</td><td>unsigned long offset_low</td><td>loff_t *result</td><td>unsigned int origin</td><td>-</td><td><a>fs/read_write.c:254</a></td></tr>
+
+			<tr><td>141</td><td><a>getdents</a></td><td>0x8d</td><td>unsigned int fd</td><td><a>struct linux_dirent</a> *dirent</td><td>unsigned int count</td><td>-</td><td>-</td><td>-</td><td><a>fs/readdir.c:191</a></td></tr>
+
+			<tr><td>142</td><td><a>_newselect</a></td><td>0x8e</td><td>int n</td><td>fd_set *inp</td><td>fd_set *outp</td><td>fd_set *exp</td><td><a>struct timeval</a> *tvp</td><td>-</td><td><a>fs/select.c:593</a></td></tr>
+
+			<tr><td>143</td><td><a>flock</a></td><td>0x8f</td><td>unsigned int fd</td><td>unsigned int cmd</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/locks.c:1636</a></td></tr>
+
+			<tr><td>144</td><td><a>msync</a></td><td>0x90</td><td>unsigned long start</td><td>size_t len</td><td>int flags</td><td>-</td><td>-</td><td>-</td><td><a>mm/msync.c:31</a></td></tr>
+
+			<tr><td>145</td><td><a>readv</a></td><td>0x91</td><td>unsigned long fd</td><td>const <a>struct iovec</a> *vec</td><td>unsigned long vlen</td><td>-</td><td>-</td><td>-</td><td><a>fs/read_write.c:787</a></td></tr>
+
+			<tr><td>146</td><td><a>writev</a></td><td>0x92</td><td>unsigned long fd</td><td>const <a>struct iovec</a> *vec</td><td>unsigned long vlen</td><td>-</td><td>-</td><td>-</td><td><a>fs/read_write.c:808</a></td></tr>
+
+			<tr><td>147</td><td><a>getsid</a></td><td>0x93</td><td>pid_t pid</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1191</a></td></tr>
+
+			<tr><td>148</td><td><a>fdatasync</a></td><td>0x94</td><td>unsigned int fd</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/sync.c:206</a></td></tr>
+
+			<tr><td>149</td><td><a>_sysctl</a></td><td>0x95</td><td><a>struct __sysctl_args</a> *args</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sysctl_binary.c:1444</a></td></tr>
+
+			<tr><td>150</td><td><a>mlock</a></td><td>0x96</td><td>unsigned long start</td><td>size_t len</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>mm/mlock.c:482</a></td></tr>
+
+			<tr><td>151</td><td><a>munlock</a></td><td>0x97</td><td>unsigned long start</td><td>size_t len</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>mm/mlock.c:512</a></td></tr>
+
+			<tr><td>152</td><td><a>mlockall</a></td><td>0x98</td><td>int flags</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>mm/mlock.c:549</a></td></tr>
+
+			<tr><td>153</td><td><a>munlockall</a></td><td>0x99</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>mm/mlock.c:582</a></td></tr>
+
+			<tr><td>154</td><td><a>sched_setparam</a></td><td>0x9a</td><td>pid_t pid</td><td><a>struct sched_param</a> *param</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sched/core.c:4477</a></td></tr>
+
+			<tr><td>155</td><td><a>sched_getparam</a></td><td>0x9b</td><td>pid_t pid</td><td><a>struct sched_param</a> *param</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sched/core.c:4512</a></td></tr>
+
+			<tr><td>156</td><td><a>sched_setscheduler</a></td><td>0x9c</td><td>pid_t pid</td><td>int policy</td><td><a>struct sched_param</a> *param</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sched/core.c:4462</a></td></tr>
+
+			<tr><td>157</td><td><a>sched_getscheduler</a></td><td>0x9d</td><td>pid_t pid</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sched/core.c:4486</a></td></tr>
+
+			<tr><td>158</td><td><a>sched_yield</a></td><td>0x9e</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sched/core.c:4711</a></td></tr>
+
+			<tr><td>159</td><td><a>sched_get_priority_max</a></td><td>0x9f</td><td>int policy</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sched/core.c:4935</a></td></tr>
+
+			<tr><td>160</td><td><a>sched_get_priority_min</a></td><td>0xa0</td><td>int policy</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sched/core.c:4960</a></td></tr>
+
+			<tr><td>161</td><td><a>sched_rr_get_interval</a></td><td>0xa1</td><td>pid_t pid</td><td><a>struct timespec</a> *interval</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sched/core.c:4985</a></td></tr>
+
+			<tr><td>162</td><td><a>nanosleep</a></td><td>0xa2</td><td><a>struct timespec</a> *rqtp</td><td><a>struct timespec</a> *rmtp</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/hrtimer.c:1621</a></td></tr>
+
+			<tr><td>163</td><td><a>mremap</a></td><td>0xa3</td><td>unsigned long addr</td><td>unsigned long old_len</td><td>unsigned long new_len</td><td>unsigned long flags</td><td>unsigned long new_addr</td><td>-</td><td><a>mm/mremap.c:431</a></td></tr>
+
+			<tr><td>164</td><td><a>setresuid</a></td><td>0xa4</td><td>uid_t ruid</td><td>uid_t euid</td><td>uid_t suid</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:808</a></td></tr>
+
+			<tr><td>165</td><td><a>getresuid</a></td><td>0xa5</td><td>uid_t *ruidp</td><td>uid_t *euidp</td><td>uid_t *suidp</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:873</a></td></tr>
+
+			<tr><td>166</td><td><a>vm86</a></td><td>0xa6</td><td>unsigned long cmd</td><td>unsigned long arg</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/vm86_32.c:232</a></td></tr>
+
+			<tr><td>167</td><td><a>query_module</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>168</td><td><a>poll</a></td><td>0xa8</td><td><a>struct pollfd</a> *ufds</td><td>unsigned int nfds</td><td>int timeout_msecs</td><td>-</td><td>-</td><td>-</td><td><a>fs/select.c:908</a></td></tr>
+
+			<tr><td>169</td><td><a>nfsservctl</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>170</td><td><a>setresgid</a></td><td>0xaa</td><td>gid_t rgid</td><td>gid_t egid</td><td>gid_t sgid</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:893</a></td></tr>
+
+			<tr><td>171</td><td><a>getresgid</a></td><td>0xab</td><td>gid_t *rgidp</td><td>gid_t *egidp</td><td>gid_t *sgidp</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:945</a></td></tr>
+
+			<tr><td>172</td><td><a>prctl</a></td><td>0xac</td><td>int option</td><td>unsigned long arg2</td><td>unsigned long arg3</td><td>unsigned long arg4</td><td>unsigned long arg5</td><td>-</td><td><a>kernel/sys.c:1999</a></td></tr>
+
+			<tr><td>173</td><td><a>rt_sigreturn</a></td><td>0xad</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/signal.c:571</a></td></tr>
+
+			<tr><td>174</td><td><a>rt_sigaction</a></td><td>0xae</td><td>int sig</td><td>const <a>struct sigaction</a> *act</td><td><a>struct sigaction</a> *oact</td><td>size_t sigsetsize</td><td>-</td><td>-</td><td><a>kernel/signal.c:3174</a></td></tr>
+
+			<tr><td>175</td><td><a>rt_sigprocmask</a></td><td>0xaf</td><td>int how</td><td>sigset_t *nset</td><td>sigset_t *oset</td><td>size_t sigsetsize</td><td>-</td><td>-</td><td><a>kernel/signal.c:2591</a></td></tr>
+
+			<tr><td>176</td><td><a>rt_sigpending</a></td><td>0xb0</td><td>sigset_t *set</td><td>size_t sigsetsize</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/signal.c:2651</a></td></tr>
+
+			<tr><td>177</td><td><a>rt_sigtimedwait</a></td><td>0xb1</td><td>const sigset_t *uthese</td><td>siginfo_t *uinfo</td><td>const <a>struct timespec</a> *uts</td><td>size_t sigsetsize</td><td>-</td><td>-</td><td><a>kernel/signal.c:2805</a></td></tr>
+
+			<tr><td>178</td><td><a>rt_sigqueueinfo</a></td><td>0xb2</td><td>pid_t pid</td><td>int sig</td><td>siginfo_t *uinfo</td><td>-</td><td>-</td><td>-</td><td><a>kernel/signal.c:2938</a></td></tr>
+
+			<tr><td>179</td><td><a>rt_sigsuspend</a></td><td>0xb3</td><td>sigset_t *unewset</td><td>size_t sigsetsize</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/signal.c:3274</a></td></tr>
+
+			<tr><td>180</td><td><a>pread64</a></td><td>0xb4</td><td>char *buf size_t count</td><td>loff_t pos</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/read_write.c:495</a></td></tr>
+
+			<tr><td>181</td><td><a>pwrite64</a></td><td>0xb5</td><td>const char *buf size_t count</td><td>loff_t pos</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/read_write.c:524</a></td></tr>
+
+			<tr><td>182</td><td><a>chown</a></td><td>0xb6</td><td>const char *filename</td><td>uid_t user</td><td>gid_t group</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:540</a></td></tr>
+
+			<tr><td>183</td><td><a>getcwd</a></td><td>0xb7</td><td>char *buf</td><td>unsigned long size</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/dcache.c:2885</a></td></tr>
+
+			<tr><td>184</td><td><a>capget</a></td><td>0xb8</td><td>cap_user_header_t header</td><td>cap_user_data_t dataptr</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/capability.c:158</a></td></tr>
+
+			<tr><td>185</td><td><a>capset</a></td><td>0xb9</td><td>cap_user_header_t header</td><td>const cap_user_data_t data</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/capability.c:232</a></td></tr>
+
+			<tr><td>186</td><td><a>sigaltstack</a></td><td>0xba</td><td>const stack_t *uss</td><td>stack_t *uoss</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/signal.c:533</a></td></tr>
+
+			<tr><td>187</td><td><a>sendfile</a></td><td>0xbb</td><td>int out_fd</td><td>int in_fd</td><td>off_t *offset</td><td>size_t count</td><td>-</td><td>-</td><td><a>fs/read_write.c:973</a></td></tr>
+
+			<tr><td>188</td><td><a>getpmsg</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>189</td><td><a>putpmsg</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>190</td><td><a>vfork</a></td><td>0xbe</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/process.c:286</a></td></tr>
+
+			<tr><td>191</td><td><a>ugetrlimit</a></td><td>0xbf</td><td>unsigned int resource</td><td><a>struct rlimit</a> *rlim</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1440</a></td></tr>
+
+			<tr><td>192</td><td><a>mmap2</a></td><td>0xc0</td><td>unsigned long addr</td><td>unsigned long len</td><td>unsigned long prot</td><td>unsigned long flags</td><td>unsigned long fd</td><td>unsigned long pgoff</td><td><a>mm/mmap.c:1105</a></td></tr>
+
+			<tr><td>193</td><td><a>truncate64</a></td><td>0xc1</td><td>loff_t length</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:188</a></td></tr>
+
+			<tr><td>194</td><td><a>ftruncate64</a></td><td>0xc2</td><td>loff_t length</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:200</a></td></tr>
+
+			<tr><td>195</td><td><a>stat64</a></td><td>0xc3</td><td>const char *filename</td><td><a>struct stat64</a> *statbuf</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/stat.c:372</a></td></tr>
+
+			<tr><td>196</td><td><a>lstat64</a></td><td>0xc4</td><td>const char *filename</td><td><a>struct stat64</a> *statbuf</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/stat.c:384</a></td></tr>
+
+			<tr><td>197</td><td><a>fstat64</a></td><td>0xc5</td><td>unsigned long fd</td><td><a>struct stat64</a> *statbuf</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/stat.c:396</a></td></tr>
+
+			<tr><td>198</td><td><a>lchown32</a></td><td>0xc6</td><td>const char *filename</td><td>uid_t user</td><td>gid_t group</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:586</a></td></tr>
+
+			<tr><td>199</td><td><a>getuid32</a></td><td>0xc7</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/timer.c:1435</a></td></tr>
+
+			<tr><td>200</td><td><a>getgid32</a></td><td>0xc8</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/timer.c:1447</a></td></tr>
+
+			<tr><td>201</td><td><a>geteuid32</a></td><td>0xc9</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/timer.c:1441</a></td></tr>
+
+			<tr><td>202</td><td><a>getegid32</a></td><td>0xca</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/timer.c:1453</a></td></tr>
+
+			<tr><td>203</td><td><a>setreuid32</a></td><td>0xcb</td><td>uid_t ruid</td><td>uid_t euid</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:690</a></td></tr>
+
+			<tr><td>204</td><td><a>setregid32</a></td><td>0xcc</td><td>gid_t rgid</td><td>gid_t egid</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:557</a></td></tr>
+
+			<tr><td>205</td><td><a>getgroups32</a></td><td>0xcd</td><td>int gidsetsize</td><td>gid_t *grouplist</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/groups.c:202</a></td></tr>
+
+			<tr><td>206</td><td><a>setgroups32</a></td><td>0xce</td><td>int gidsetsize</td><td>gid_t *grouplist</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/groups.c:231</a></td></tr>
+
+			<tr><td>207</td><td><a>fchown32</a></td><td>0xcf</td><td>unsigned int fd</td><td>uid_t user</td><td>gid_t group</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:605</a></td></tr>
+
+			<tr><td>208</td><td><a>setresuid32</a></td><td>0xd0</td><td>uid_t ruid</td><td>uid_t euid</td><td>uid_t suid</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:808</a></td></tr>
+
+			<tr><td>209</td><td><a>getresuid32</a></td><td>0xd1</td><td>uid_t *ruidp</td><td>uid_t *euidp</td><td>uid_t *suidp</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:873</a></td></tr>
+
+			<tr><td>210</td><td><a>setresgid32</a></td><td>0xd2</td><td>gid_t rgid</td><td>gid_t egid</td><td>gid_t sgid</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:893</a></td></tr>
+
+			<tr><td>211</td><td><a>getresgid32</a></td><td>0xd3</td><td>gid_t *rgidp</td><td>gid_t *egidp</td><td>gid_t *sgidp</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:945</a></td></tr>
+
+			<tr><td>212</td><td><a>chown32</a></td><td>0xd4</td><td>const char *filename</td><td>uid_t user</td><td>gid_t group</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:540</a></td></tr>
+
+			<tr><td>213</td><td><a>setuid32</a></td><td>0xd5</td><td>uid_t uid</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:761</a></td></tr>
+
+			<tr><td>214</td><td><a>setgid32</a></td><td>0xd6</td><td>gid_t gid</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:614</a></td></tr>
+
+			<tr><td>215</td><td><a>setfsuid32</a></td><td>0xd7</td><td>uid_t uid</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:969</a></td></tr>
+
+			<tr><td>216</td><td><a>setfsgid32</a></td><td>0xd8</td><td>gid_t gid</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:1008</a></td></tr>
+
+			<tr><td>217</td><td><a>pivot_root</a></td><td>0xd9</td><td>const char *new_root</td><td>const char *put_old</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/namespace.c:2453</a></td></tr>
+
+			<tr><td>218</td><td><a>mincore</a></td><td>0xda</td><td>unsigned long start</td><td>size_t len</td><td>unsigned char *vec</td><td>-</td><td>-</td><td>-</td><td><a>mm/mincore.c:266</a></td></tr>
+
+			<tr><td>219</td><td><a>madvise</a></td><td>0xdb</td><td>unsigned long start</td><td>size_t len_in</td><td>int behavior</td><td>-</td><td>-</td><td>-</td><td><a>mm/madvise.c:362</a></td></tr>
+
+			<tr><td>220</td><td><a>getdents64</a></td><td>0xdc</td><td>unsigned int fd</td><td><a>struct linux_dirent64</a> *dirent</td><td>unsigned int count</td><td>-</td><td>-</td><td>-</td><td><a>fs/readdir.c:272</a></td></tr>
+
+			<tr><td>221</td><td><a>fcntl64</a></td><td>0xdd</td><td>unsigned int fd</td><td>unsigned int cmd</td><td>unsigned long arg</td><td>-</td><td>-</td><td>-</td><td><a>fs/fcntl.c:468</a></td></tr>
+
+			<tr><td>224</td><td><a>gettid</a></td><td>0xe0</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/timer.c:1569</a></td></tr>
+
+			<tr><td>225</td><td><a>readahead</a></td><td>0xe1</td><td>loff_t offset size_t count</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>mm/readahead.c:579</a></td></tr>
+
+			<tr><td>226</td><td><a>setxattr</a></td><td>0xe2</td><td>const char *pathname</td><td>const char *name</td><td>const void *value</td><td>size_t size</td><td>int flags</td><td>-</td><td><a>fs/xattr.c:361</a></td></tr>
+
+			<tr><td>227</td><td><a>lsetxattr</a></td><td>0xe3</td><td>const char *pathname</td><td>const char *name</td><td>const void *value</td><td>size_t size</td><td>int flags</td><td>-</td><td><a>fs/xattr.c:380</a></td></tr>
+
+			<tr><td>228</td><td><a>fsetxattr</a></td><td>0xe4</td><td>int fd</td><td>const char *name</td><td>const void *value</td><td>size_t size</td><td>int flags</td><td>-</td><td><a>fs/xattr.c:399</a></td></tr>
+
+			<tr><td>229</td><td><a>getxattr</a></td><td>0xe5</td><td>const char *pathname</td><td>const char *name</td><td>void *value</td><td>size_t size</td><td>-</td><td>-</td><td><a>fs/xattr.c:459</a></td></tr>
+
+			<tr><td>230</td><td><a>lgetxattr</a></td><td>0xe6</td><td>const char *pathname</td><td>const char *name</td><td>void *value</td><td>size_t size</td><td>-</td><td>-</td><td><a>fs/xattr.c:473</a></td></tr>
+
+			<tr><td>231</td><td><a>fgetxattr</a></td><td>0xe7</td><td>int fd</td><td>const char *name</td><td>void *value</td><td>size_t size</td><td>-</td><td>-</td><td><a>fs/xattr.c:487</a></td></tr>
+
+			<tr><td>232</td><td><a>listxattr</a></td><td>0xe8</td><td>const char *pathname</td><td>char *list</td><td>size_t size</td><td>-</td><td>-</td><td>-</td><td><a>fs/xattr.c:541</a></td></tr>
+
+			<tr><td>233</td><td><a>llistxattr</a></td><td>0xe9</td><td>const char *pathname</td><td>char *list</td><td>size_t size</td><td>-</td><td>-</td><td>-</td><td><a>fs/xattr.c:555</a></td></tr>
+
+			<tr><td>234</td><td><a>flistxattr</a></td><td>0xea</td><td>int fd</td><td>char *list</td><td>size_t size</td><td>-</td><td>-</td><td>-</td><td><a>fs/xattr.c:569</a></td></tr>
+
+			<tr><td>235</td><td><a>removexattr</a></td><td>0xeb</td><td>const char *pathname</td><td>const char *name</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/xattr.c:602</a></td></tr>
+
+			<tr><td>236</td><td><a>lremovexattr</a></td><td>0xec</td><td>const char *pathname</td><td>const char *name</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/xattr.c:620</a></td></tr>
+
+			<tr><td>237</td><td><a>fremovexattr</a></td><td>0xed</td><td>int fd</td><td>const char *name</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/xattr.c:638</a></td></tr>
+
+			<tr><td>238</td><td><a>tkill</a></td><td>0xee</td><td>pid_t pid</td><td>int sig</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/signal.c:2923</a></td></tr>
+
+			<tr><td>239</td><td><a>sendfile64</a></td><td>0xef</td><td>int out_fd</td><td>int in_fd</td><td>loff_t *offset</td><td>size_t count</td><td>-</td><td>-</td><td><a>fs/read_write.c:992</a></td></tr>
+
+			<tr><td>240</td><td><a>futex</a></td><td>0xf0</td><td>u32 *uaddr</td><td>int op</td><td>u32 val</td><td><a>struct timespec</a> *utime</td><td>u32 *uaddr2</td><td>u32 val3</td><td><a>kernel/futex.c:2680</a></td></tr>
+
+			<tr><td>241</td><td><a>sched_setaffinity</a></td><td>0xf1</td><td>pid_t pid</td><td>unsigned int len</td><td>unsigned long *user_mask_ptr</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sched/core.c:4626</a></td></tr>
+
+			<tr><td>242</td><td><a>sched_getaffinity</a></td><td>0xf2</td><td>pid_t pid</td><td>unsigned int len</td><td>unsigned long *user_mask_ptr</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sched/core.c:4677</a></td></tr>
+
+			<tr><td>243</td><td><a>set_thread_area</a></td><td>0xf3</td><td><a>struct user_desc</a> *u_info</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/tls.c:92</a></td></tr>
+
+			<tr><td>244</td><td><a>get_thread_area</a></td><td>0xf4</td><td><a>struct user_desc</a> *u_info</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>arch/x86/kernel/tls.c:142</a></td></tr>
+
+			<tr><td>245</td><td><a>io_setup</a></td><td>0xf5</td><td>unsigned nr_events</td><td>aio_context_t *ctxp</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/aio.c:1298</a></td></tr>
+
+			<tr><td>246</td><td><a>io_destroy</a></td><td>0xf6</td><td>aio_context_t ctx</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/aio.c:1334</a></td></tr>
+
+			<tr><td>247</td><td><a>io_getevents</a></td><td>0xf7</td><td>aio_context_t ctx_id</td><td>long min_nr</td><td>long nr</td><td><a>struct io_event</a> *events</td><td><a>struct timespec</a> *timeout</td><td>-</td><td><a>fs/aio.c:1844</a></td></tr>
+
+			<tr><td>248</td><td><a>io_submit</a></td><td>0xf8</td><td>aio_context_t ctx_id</td><td>long nr</td><td><a>struct iocb</a> * *iocbpp</td><td>-</td><td>-</td><td>-</td><td><a>fs/aio.c:1746</a></td></tr>
+
+			<tr><td>249</td><td><a>io_cancel</a></td><td>0xf9</td><td>aio_context_t ctx_id</td><td><a>struct iocb</a> *iocb</td><td><a>struct io_event</a> *result</td><td>-</td><td>-</td><td>-</td><td><a>fs/aio.c:1781</a></td></tr>
+
+			<tr><td>250</td><td><a>fadvise64</a></td><td>0xfa</td><td>loff_t offset size_t len</td><td>int advice</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>mm/fadvise.c:148</a></td></tr>
+
+			<tr><td>252</td><td><a>exit_group</a></td><td>0xfc</td><td>int error_code</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/exit.c:1136</a></td></tr>
+
+			<tr><td>253</td><td><a>lookup_dcookie</a></td><td>0xfd</td><td>char *buf size_t len</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/dcookies.c:148</a></td></tr>
+
+			<tr><td>254</td><td><a>epoll_create</a></td><td>0xfe</td><td>int size</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/eventpoll.c:1668</a></td></tr>
+
+			<tr><td>255</td><td><a>epoll_ctl</a></td><td>0xff</td><td>int epfd</td><td>int op</td><td>int fd</td><td><a>struct epoll_event</a> *event</td><td>-</td><td>-</td><td><a>fs/eventpoll.c:1681</a></td></tr>
+
+			<tr><td>256</td><td><a>epoll_wait</a></td><td>0x100</td><td>int epfd</td><td><a>struct epoll_event</a> *events</td><td>int maxevents</td><td>int timeout</td><td>-</td><td>-</td><td><a>fs/eventpoll.c:1809</a></td></tr>
+
+			<tr><td>257</td><td><a>remap_file_pages</a></td><td>0x101</td><td>unsigned long start</td><td>unsigned long size</td><td>unsigned long prot</td><td>unsigned long pgoff</td><td>unsigned long flags</td><td>-</td><td><a>mm/fremap.c:122</a></td></tr>
+
+			<tr><td>258</td><td><a>set_tid_address</a></td><td>0x102</td><td>int *tidptr</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/fork.c:1109</a></td></tr>
+
+			<tr><td>259</td><td><a>timer_create</a></td><td>0x103</td><td>const clockid_t which_clock</td><td><a>struct sigevent</a> *timer_event_spec</td><td>timer_t *created_timer_id</td><td>-</td><td>-</td><td>-</td><td><a>kernel/posix-timers.c:535</a></td></tr>
+
+			<tr><td>260</td><td><a>timer_settime</a></td><td>0x104</td><td>timer_t timer_id</td><td>int flags</td><td>const <a>struct itimerspec</a> *new_setting</td><td><a>struct itimerspec</a> *old_setting</td><td>-</td><td>-</td><td><a>kernel/posix-timers.c:819</a></td></tr>
+
+			<tr><td>261</td><td><a>timer_gettime</a></td><td>0x105</td><td>timer_t timer_id</td><td><a>struct itimerspec</a> *setting</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/posix-timers.c:715</a></td></tr>
+
+			<tr><td>262</td><td><a>timer_getoverrun</a></td><td>0x106</td><td>timer_t timer_id</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/posix-timers.c:751</a></td></tr>
+
+			<tr><td>263</td><td><a>timer_delete</a></td><td>0x107</td><td>timer_t timer_id</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/posix-timers.c:882</a></td></tr>
+
+			<tr><td>264</td><td><a>clock_settime</a></td><td>0x108</td><td>const clockid_t which_clock</td><td>const <a>struct timespec</a> *tp</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/posix-timers.c:950</a></td></tr>
+
+			<tr><td>265</td><td><a>clock_gettime</a></td><td>0x109</td><td>const clockid_t which_clock</td><td><a>struct timespec</a> *tp</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/posix-timers.c:965</a></td></tr>
+
+			<tr><td>266</td><td><a>clock_getres</a></td><td>0x10a</td><td>const clockid_t which_clock</td><td><a>struct timespec</a> *tp</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/posix-timers.c:1006</a></td></tr>
+
+			<tr><td>267</td><td><a>clock_nanosleep</a></td><td>0x10b</td><td>const clockid_t which_clock</td><td>int flags</td><td>const <a>struct timespec</a> *rqtp</td><td><a>struct timespec</a> *rmtp</td><td>-</td><td>-</td><td><a>kernel/posix-timers.c:1035</a></td></tr>
+
+			<tr><td>268</td><td><a>statfs64</a></td><td>0x10c</td><td>const char *pathname</td><td>size_t sz</td><td><a>struct statfs64</a> *buf</td><td>-</td><td>-</td><td>-</td><td><a>fs/statfs.c:175</a></td></tr>
+
+			<tr><td>269</td><td><a>fstatfs64</a></td><td>0x10d</td><td>unsigned int fd</td><td>size_t sz</td><td><a>struct statfs64</a> *buf</td><td>-</td><td>-</td><td>-</td><td><a>fs/statfs.c:196</a></td></tr>
+
+			<tr><td>270</td><td><a>tgkill</a></td><td>0x10e</td><td>pid_t tgid</td><td>pid_t pid</td><td>int sig</td><td>-</td><td>-</td><td>-</td><td><a>kernel/signal.c:2907</a></td></tr>
+
+			<tr><td>271</td><td><a>utimes</a></td><td>0x10f</td><td>char *filename</td><td><a>struct timeval</a> *utimes</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/utimes.c:221</a></td></tr>
+
+			<tr><td>272</td><td><a>fadvise64_64</a></td><td>0x110</td><td>loff_t offset loff_t len</td><td>int advice</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>mm/fadvise.c:27</a></td></tr>
+
+			<tr><td>273</td><td><a>vserver</a></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>Not implemented</td></tr>
+
+			<tr><td>274</td><td><a>mbind</a></td><td>0x112</td><td>unsigned long start</td><td>unsigned long len</td><td>unsigned long mode</td><td>unsigned long *nmask</td><td>unsigned long maxnode</td><td>unsigned flags</td><td><a>mm/mempolicy.c:1263</a></td></tr>
+
+			<tr><td>275</td><td><a>get_mempolicy</a></td><td>0x113</td><td>int *policy</td><td>unsigned long *nmask</td><td>unsigned long maxnode</td><td>unsigned long addr</td><td>unsigned long flags</td><td>-</td><td><a>mm/mempolicy.c:1400</a></td></tr>
+
+			<tr><td>276</td><td><a>set_mempolicy</a></td><td>0x114</td><td>int mode</td><td>unsigned long *nmask</td><td>unsigned long maxnode</td><td>-</td><td>-</td><td>-</td><td><a>mm/mempolicy.c:1285</a></td></tr>
+
+			<tr><td>277</td><td><a>mq_open</a></td><td>0x115</td><td>const char *u_name</td><td>int oflag</td><td>umode_t mode</td><td><a>struct mq_attr</a> *u_attr</td><td>-</td><td>-</td><td><a>ipc/mqueue.c:803</a></td></tr>
+
+			<tr><td>278</td><td><a>mq_unlink</a></td><td>0x116</td><td>const char *u_name</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>ipc/mqueue.c:876</a></td></tr>
+
+			<tr><td>279</td><td><a>mq_timedsend</a></td><td>0x117</td><td>mqd_t mqdes</td><td>const char *u_msg_ptr</td><td>size_t msg_len</td><td>unsigned int msg_prio</td><td>const <a>struct timespec</a> *u_abs_timeout</td><td>-</td><td><a>ipc/mqueue.c:971</a></td></tr>
+
+			<tr><td>280</td><td><a>mq_timedreceive</a></td><td>0x118</td><td>mqd_t mqdes</td><td>char *u_msg_ptr</td><td>size_t msg_len</td><td>unsigned int *u_msg_prio</td><td>const <a>struct timespec</a> *u_abs_timeout</td><td>-</td><td><a>ipc/mqueue.c:1092</a></td></tr>
+
+			<tr><td>281</td><td><a>mq_notify</a></td><td>0x119</td><td>mqd_t mqdes</td><td>const <a>struct sigevent</a> *u_notification</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>ipc/mqueue.c:1201</a></td></tr>
+
+			<tr><td>282</td><td><a>mq_getsetattr</a></td><td>0x11a</td><td>mqd_t mqdes</td><td>const <a>struct mq_attr</a> *u_mqstat</td><td><a>struct mq_attr</a> *u_omqstat</td><td>-</td><td>-</td><td>-</td><td><a>ipc/mqueue.c:1333</a></td></tr>
+
+			<tr><td>283</td><td><a>kexec_load</a></td><td>0x11b</td><td>unsigned long entry</td><td>unsigned long nr_segments</td><td><a>struct kexec_segment</a> *segments</td><td>unsigned long flags</td><td>-</td><td>-</td><td><a>kernel/kexec.c:940</a></td></tr>
+
+			<tr><td>284</td><td><a>waitid</a></td><td>0x11c</td><td>int which</td><td>pid_t upid</td><td><a>struct siginfo</a> *infop</td><td>int options</td><td><a>struct rusage</a> *ru</td><td>-</td><td><a>kernel/exit.c:1763</a></td></tr>
+
+			<tr><td>286</td><td><a>add_key</a></td><td>0x11e</td><td>const char *_type</td><td>const char *_description</td><td>const void *_payload</td><td>size_t plen</td><td>key_serial_t ringid</td><td>-</td><td><a>security/keys/keyctl.c:54</a></td></tr>
+
+			<tr><td>287</td><td><a>request_key</a></td><td>0x11f</td><td>const char *_type</td><td>const char *_description</td><td>const char *_callout_info</td><td>key_serial_t destringid</td><td>-</td><td>-</td><td><a>security/keys/keyctl.c:147</a></td></tr>
+
+			<tr><td>288</td><td><a>keyctl</a></td><td>0x120</td><td>int option</td><td>unsigned long arg2</td><td>unsigned long arg3</td><td>unsigned long arg4</td><td>unsigned long arg5</td><td>-</td><td><a>security/keys/keyctl.c:1556</a></td></tr>
+
+			<tr><td>289</td><td><a>ioprio_set</a></td><td>0x121</td><td>int which</td><td>int who</td><td>int ioprio</td><td>-</td><td>-</td><td>-</td><td><a>fs/ioprio.c:61</a></td></tr>
+
+			<tr><td>290</td><td><a>ioprio_get</a></td><td>0x122</td><td>int which</td><td>int who</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/ioprio.c:176</a></td></tr>
+
+			<tr><td>291</td><td><a>inotify_init</a></td><td>0x123</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/notify/inotify/inotify_user.c:749</a></td></tr>
+
+			<tr><td>292</td><td><a>inotify_add_watch</a></td><td>0x124</td><td>int fd</td><td>const char *pathname</td><td>u32 mask</td><td>-</td><td>-</td><td>-</td><td><a>fs/notify/inotify/inotify_user.c:754</a></td></tr>
+
+			<tr><td>293</td><td><a>inotify_rm_watch</a></td><td>0x125</td><td>int fd</td><td>__s32 wd</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/notify/inotify/inotify_user.c:795</a></td></tr>
+
+			<tr><td>294</td><td><a>migrate_pages</a></td><td>0x126</td><td>pid_t pid</td><td>unsigned long maxnode</td><td>const unsigned long *old_nodes</td><td>const unsigned long *new_nodes</td><td>-</td><td>-</td><td><a>mm/mempolicy.c:1304</a></td></tr>
+
+			<tr><td>295</td><td><a>openat</a></td><td>0x127</td><td>int dfd</td><td>const char *filename</td><td>int flags</td><td>umode_t mode</td><td>-</td><td>-</td><td><a>fs/open.c:1059</a></td></tr>
+
+			<tr><td>296</td><td><a>mkdirat</a></td><td>0x128</td><td>int dfd</td><td>const char *pathname</td><td>umode_t mode</td><td>-</td><td>-</td><td>-</td><td><a>fs/namei.c:2723</a></td></tr>
+
+			<tr><td>297</td><td><a>mknodat</a></td><td>0x129</td><td>int dfd</td><td>const char *filename</td><td>umode_t mode</td><td>unsigned dev</td><td>-</td><td>-</td><td><a>fs/namei.c:2646</a></td></tr>
+
+			<tr><td>298</td><td><a>fchownat</a></td><td>0x12a</td><td>int dfd</td><td>const char *filename</td><td>uid_t user</td><td>gid_t group</td><td>int flag</td><td>-</td><td><a>fs/open.c:559</a></td></tr>
+
+			<tr><td>299</td><td><a>futimesat</a></td><td>0x12b</td><td>int dfd</td><td>const char *filename</td><td><a>struct timeval</a> *utimes</td><td>-</td><td>-</td><td>-</td><td><a>fs/utimes.c:193</a></td></tr>
+
+			<tr><td>300</td><td><a>fstatat64</a></td><td>0x12c</td><td>int dfd</td><td>const char *filename</td><td><a>struct stat64</a> *statbuf</td><td>int flag</td><td>-</td><td>-</td><td><a>fs/stat.c:407</a></td></tr>
+
+			<tr><td>301</td><td><a>unlinkat</a></td><td>0x12d</td><td>int dfd</td><td>const char *pathname</td><td>int flag</td><td>-</td><td>-</td><td>-</td><td><a>fs/namei.c:2968</a></td></tr>
+
+			<tr><td>302</td><td><a>renameat</a></td><td>0x12e</td><td>int olddfd</td><td>const char *oldname</td><td>int newdfd</td><td>const char *newname</td><td>-</td><td>-</td><td><a>fs/namei.c:3309</a></td></tr>
+
+			<tr><td>303</td><td><a>linkat</a></td><td>0x12f</td><td>int olddfd</td><td>const char *oldname</td><td>int newdfd</td><td>const char *newname</td><td>int flags</td><td>-</td><td><a>fs/namei.c:3097</a></td></tr>
+
+			<tr><td>304</td><td><a>symlinkat</a></td><td>0x130</td><td>const char *oldname</td><td>int newdfd</td><td>const char *newname</td><td>-</td><td>-</td><td>-</td><td><a>fs/namei.c:3004</a></td></tr>
+
+			<tr><td>305</td><td><a>readlinkat</a></td><td>0x131</td><td>int dfd</td><td>const char *pathname</td><td>char *buf</td><td>int bufsiz</td><td>-</td><td>-</td><td><a>fs/stat.c:293</a></td></tr>
+
+			<tr><td>306</td><td><a>fchmodat</a></td><td>0x132</td><td>int dfd</td><td>const char *filename</td><td>umode_t mode</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:486</a></td></tr>
+
+			<tr><td>307</td><td><a>faccessat</a></td><td>0x133</td><td>int dfd</td><td>const char *filename</td><td>int mode</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:299</a></td></tr>
+
+			<tr><td>308</td><td><a>pselect6</a></td><td>0x134</td><td>int n</td><td>fd_set *inp</td><td>fd_set *outp</td><td>fd_set *exp</td><td><a>struct timespec</a> *tsp</td><td>void *sig</td><td><a>fs/select.c:671</a></td></tr>
+
+			<tr><td>309</td><td><a>ppoll</a></td><td>0x135</td><td><a>struct pollfd</a> *ufds</td><td>unsigned int nfds</td><td><a>struct timespec</a> *tsp</td><td>const sigset_t *sigmask</td><td>size_t sigsetsize</td><td>-</td><td><a>fs/select.c:942</a></td></tr>
+
+			<tr><td>310</td><td><a>unshare</a></td><td>0x136</td><td>unsigned long unshare_flags</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/fork.c:1778</a></td></tr>
+
+			<tr><td>311</td><td><a>set_robust_list</a></td><td>0x137</td><td><a>struct robust_list_head</a> *head</td><td>size_t len</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/futex.c:2422</a></td></tr>
+
+			<tr><td>312</td><td><a>get_robust_list</a></td><td>0x138</td><td>int pid</td><td><a>struct robust_list_head</a> * *head_ptr</td><td>size_t *len_ptr</td><td>-</td><td>-</td><td>-</td><td><a>kernel/futex.c:2444</a></td></tr>
+
+			<tr><td>313</td><td><a>splice</a></td><td>0x139</td><td>int fd_in</td><td>loff_t *off_in</td><td>int fd_out</td><td>loff_t *off_out</td><td>size_t len</td><td>unsigned int flags</td><td><a>fs/splice.c:1689</a></td></tr>
+
+			<tr><td>314</td><td><a>sync_file_range</a></td><td>0x13a</td><td>loff_t offset loff_t nbytes</td><td>unsigned int flags</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/sync.c:275</a></td></tr>
+
+			<tr><td>315</td><td><a>tee</a></td><td>0x13b</td><td>int fdin</td><td>int fdout</td><td>size_t len</td><td>unsigned int flags</td><td>-</td><td>-</td><td><a>fs/splice.c:2025</a></td></tr>
+
+			<tr><td>316</td><td><a>vmsplice</a></td><td>0x13c</td><td>int fd</td><td>const <a>struct iovec</a> *iov</td><td>unsigned long nr_segs</td><td>unsigned int flags</td><td>-</td><td>-</td><td><a>fs/splice.c:1663</a></td></tr>
+
+			<tr><td>317</td><td><a>move_pages</a></td><td>0x13d</td><td>pid_t pid</td><td>unsigned long nr_pages</td><td>const void * *pages</td><td>const int *nodes</td><td>int *status</td><td>int flags</td><td><a>mm/migrate.c:1343</a></td></tr>
+
+			<tr><td>318</td><td><a>getcpu</a></td><td>0x13e</td><td>unsigned *cpup</td><td>unsigned *nodep</td><td><a>struct getcpu_cache</a> *unused</td><td>-</td><td>-</td><td>-</td><td><a>kernel/sys.c:2179</a></td></tr>
+
+			<tr><td>319</td><td><a>epoll_pwait</a></td><td>0x13f</td><td>int epfd</td><td><a>struct epoll_event</a> *events</td><td>int maxevents</td><td>int timeout</td><td>const sigset_t *sigmask</td><td>size_t sigsetsize</td><td><a>fs/eventpoll.c:1860</a></td></tr>
+
+			<tr><td>320</td><td><a>utimensat</a></td><td>0x140</td><td>int dfd</td><td>const char *filename</td><td><a>struct timespec</a> *utimes</td><td>int flags</td><td>-</td><td>-</td><td><a>fs/utimes.c:175</a></td></tr>
+
+			<tr><td>321</td><td><a>signalfd</a></td><td>0x141</td><td>int ufd</td><td>sigset_t *user_mask</td><td>size_t sizemask</td><td>-</td><td>-</td><td>-</td><td><a>fs/signalfd.c:292</a></td></tr>
+
+			<tr><td>322</td><td><a>timerfd_create</a></td><td>0x142</td><td>int clockid</td><td>int flags</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/timerfd.c:252</a></td></tr>
+
+			<tr><td>323</td><td><a>eventfd</a></td><td>0x143</td><td>unsigned int count</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/eventfd.c:431</a></td></tr>
+
+			<tr><td>324</td><td><a>fallocate</a></td><td>0x144</td><td>int mode loff_t offset</td><td>loff_t len</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/open.c:272</a></td></tr>
+
+			<tr><td>325</td><td><a>timerfd_settime</a></td><td>0x145</td><td>int ufd</td><td>int flags</td><td>const <a>struct itimerspec</a> *utmr</td><td><a>struct itimerspec</a> *otmr</td><td>-</td><td>-</td><td><a>fs/timerfd.c:283</a></td></tr>
+
+			<tr><td>326</td><td><a>timerfd_gettime</a></td><td>0x146</td><td>int ufd</td><td><a>struct itimerspec</a> *otmr</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/timerfd.c:344</a></td></tr>
+
+			<tr><td>327</td><td><a>signalfd4</a></td><td>0x147</td><td>int ufd</td><td>sigset_t *user_mask</td><td>size_t sizemask</td><td>int flags</td><td>-</td><td>-</td><td><a>fs/signalfd.c:237</a></td></tr>
+
+			<tr><td>328</td><td><a>eventfd2</a></td><td>0x148</td><td>unsigned int count</td><td>int flags</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/eventfd.c:406</a></td></tr>
+
+			<tr><td>329</td><td><a>epoll_create1</a></td><td>0x149</td><td>int flags</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/eventpoll.c:1625</a></td></tr>
+
+			<tr><td>330</td><td><a>dup3</a></td><td>0x14a</td><td>unsigned int oldfd</td><td>unsigned int newfd</td><td>int flags</td><td>-</td><td>-</td><td>-</td><td><a>fs/fcntl.c:53</a></td></tr>
+
+			<tr><td>331</td><td><a>pipe2</a></td><td>0x14b</td><td>int *fildes</td><td>int flags</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/pipe.c:1133</a></td></tr>
+
+			<tr><td>332</td><td><a>inotify_init1</a></td><td>0x14c</td><td>int flags</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/notify/inotify/inotify_user.c:724</a></td></tr>
+
+			<tr><td>333</td><td><a>preadv</a></td><td>0x14d</td><td>unsigned long fd</td><td>const <a>struct iovec</a> *vec</td><td>unsigned long vlen</td><td>unsigned long pos_l</td><td>unsigned long pos_h</td><td>-</td><td><a>fs/read_write.c:835</a></td></tr>
+
+			<tr><td>334</td><td><a>pwritev</a></td><td>0x14e</td><td>unsigned long fd</td><td>const <a>struct iovec</a> *vec</td><td>unsigned long vlen</td><td>unsigned long pos_l</td><td>unsigned long pos_h</td><td>-</td><td><a>fs/read_write.c:860</a></td></tr>
+
+			<tr><td>335</td><td><a>rt_tgsigqueueinfo</a></td><td>0x14f</td><td>pid_t tgid</td><td>pid_t pid</td><td>int sig</td><td>siginfo_t *uinfo</td><td>-</td><td>-</td><td><a>kernel/signal.c:2979</a></td></tr>
+
+			<tr><td>336</td><td><a>perf_event_open</a></td><td>0x150</td><td><a>struct perf_event_attr</a> *attr_uptr</td><td>pid_t pid</td><td>int cpu</td><td>int group_fd</td><td>unsigned long flags</td><td>-</td><td><a>kernel/events/core.c:6186</a></td></tr>
+
+			<tr><td>337</td><td><a>recvmmsg</a></td><td>0x151</td><td>int fd</td><td><a>struct mmsghdr</a> *mmsg</td><td>unsigned int vlen</td><td>unsigned int flags</td><td><a>struct timespec</a> *timeout</td><td>-</td><td><a>net/socket.c:2313</a></td></tr>
+
+			<tr><td>338</td><td><a>fanotify_init</a></td><td>0x152</td><td>unsigned int flags</td><td>unsigned int event_f_flags</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/notify/fanotify/fanotify_user.c:679</a></td></tr>
+
+			<tr><td>339</td><td><a>fanotify_mark</a></td><td>0x153</td><td>unsigned int flags __u64 mask</td><td>int dfd const char *pathname</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/notify/fanotify/fanotify_user.c:767</a></td></tr>
+
+			<tr><td>340</td><td><a>prlimit64</a></td><td>0x154</td><td>pid_t pid</td><td>unsigned int resource</td><td>const <a>struct rlimit64</a> *new_rlim</td><td><a>struct rlimit64</a> *old_rlim</td><td>-</td><td>-</td><td><a>kernel/sys.c:1599</a></td></tr>
+
+			<tr><td>341</td><td><a>name_to_handle_at</a></td><td>0x155</td><td>int dfd</td><td>const char *name</td><td><a>struct file_handle</a> *handle</td><td>int *mnt_id</td><td>int flag</td><td>-</td><td><a>fs/fhandle.c:92</a></td></tr>
+
+			<tr><td>342</td><td><a>open_by_handle_at</a></td><td>0x156</td><td>int mountdirfd</td><td><a>struct file_handle</a> *handle</td><td>int flags</td><td>-</td><td>-</td><td>-</td><td><a>fs/fhandle.c:257</a></td></tr>
+
+			<tr><td>343</td><td><a>clock_adjtime</a></td><td>0x157</td><td>const clockid_t which_clock</td><td><a>struct timex</a> *utx</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/posix-timers.c:983</a></td></tr>
+
+			<tr><td>344</td><td><a>syncfs</a></td><td>0x158</td><td>int fd</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>fs/sync.c:134</a></td></tr>
+
+			<tr><td>345</td><td><a>sendmmsg</a></td><td>0x159</td><td>int fd</td><td><a>struct mmsghdr</a> *mmsg</td><td>unsigned int vlen</td><td>unsigned int flags</td><td>-</td><td>-</td><td><a>net/socket.c:2091</a></td></tr>
+
+			<tr><td>346</td><td><a>setns</a></td><td>0x15a</td><td>int fd</td><td>int nstype</td><td>-</td><td>-</td><td>-</td><td>-</td><td><a>kernel/nsproxy.c:235</a></td></tr>
+
+			<tr><td>347</td><td><a>process_vm_readv</a></td><td>0x15b</td><td>pid_t pid</td><td>const <a>struct iovec</a> *lvec</td><td>unsigned long liovcnt</td><td>const <a>struct iovec</a> *rvec</td><td>unsigned long riovcnt</td><td>unsigned long flags</td><td><a>mm/process_vm_access.c:398</a></td></tr>
+
+			<tr><td>348</td><td><a>process_vm_writev</a></td><td>0x15c</td><td>pid_t pid</td><td>const <a>struct iovec</a> *lvec</td><td>unsigned long liovcnt</td><td>const <a>struct iovec</a> *rvec</td><td>unsigned long riovcnt</td><td>unsigned long flags</td><td><a>mm/process_vm_access.c:405</a></td></tr>
+
+			<tr><td>349</td><td><a>kcmp</a></td><td>0x15d</td><td>pid_t pid1</td><td>pid_t pid2</td><td>int type</td><td>unsigned long idx1</td><td>unsigned long idx2</td><td>-</td><td><a>kernel/kcmp.c:95</a></td></tr>
+
+		</tbody>
+
+	</table>
+
+
+
+</body></html>
