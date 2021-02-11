@@ -63,7 +63,7 @@ section .text
             ;lowercase
             ;Z 090 01011010
             ;  032 00100000
-            ;  AND --------
+            ;  OR --------
 
             and al, 223
 
