@@ -1,4 +1,4 @@
-# assembly-nasm-codes
+# assembly nasm codes
 
 #### Alguns Códigos Assembly x86 usando NASM.
 
