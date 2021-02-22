@@ -1,37 +1,37 @@
 # assembly-nasm-codes
 -----
 
-## Instalação
-##### 1. Clone o Repositório:
-(ou Baixe e Extraia a zip [AQUI](https://github.com/GabriOliv/assembly-nasm-codes/archive/main.zip))
+## Installation
+##### 1. Clone the Repository:
+(or Download and Extract a zip [HERE](https://github.com/GabriOliv/assembly-nasm-codes/archive/main.zip))
 ```sh
 git clone https://github.com/GabriOliv/assembly-nasm-codes.git
 ```
 
-##### 2. Instale [NASM](https://www.nasm.us/):
-- Se no Ubuntu 18.04:
+##### 2. Install [NASM](https://www.nasm.us/):
+- If in Ubuntu 18.04:
     ```sh
     sudo apt update
     sudo apt install nasm
     ```
 ---
-## Compilação
-##### Use o script .sh
-1. Dê a Permissão
+## Compilation
+##### Use the script .sh
+1. Give Permission
     ```sh
     chmod +x compile_asm.sh
     ```
 
-2. Execute o script .sh (sem ".asm")
+2. Run the script .sh (without ".asm")
     ```sh
-    ./compile_asm Nome_Script
+    ./compile_asm Script_Name
     ```
-3. Execute o script .asm compilado
+3. Run the Assembly Script .exe
     ```sh
-    ./Nome_Script.exe
+    ./Script_Name.exe
     ```
 
-##### Use os Commandos Tradicionais
+##### Use the Default Commands
 1. mount
     ```sh
     nasm -f elf64 program.asm
@@ -48,26 +48,23 @@ git clone https://github.com/GabriOliv/assembly-nasm-codes.git
 
 
 
-## Lista dos Scripts
-Listagem dos Scripts do repositório
+## List of Scripts
+Listing of Scripts in this Repository
 
-| Scripts (.asm) | Descrição | Programação |
+| Scripts (.asm) | Description | Programming |
 | ------ | ------ | ------ |
-| 001_Nothing | Script Simples | Chamada de Sistema simples (mov, int) |
-| 002_Output_Msg | Saida de Texto estático | Uso de seção estática (section .data) |
-| 003_Input_Msg | Retorna entrada do usuário na tela | Entrada de Texto usando Buffers (section .bss) |
-| 004_Jump_Flag | Retorna se é Par ou Impar | Comparação (cmp), <br/>Jump (jmp) <br/>e Labels |
-| 005_Subroutines | Retorna se é Par ou Impar | Chamada de subrotina (call) |
-| 006_Macro_Intern | Retorna se é Par ou Impar | Macros de código dentro do mesmo arquivo (%macro) |
-| 007_0_Macro_Extern | Retorna se é Par ou Impar | Chamada de Macro externo ao arquivo (%include) |
-| 007_1_Macro_Lib | Biblioteca de Macros | Biblioteca de Macros chamada pelo Script "007_0_Macro_Extern" |
-| 008_Input_Validation | Soma de Dois Números | Validação de Entrada usando Pilha (push, pop) |
-| 009_Open_File | Retorna Conteúdo do Arquivo | Syscall 5 (open)  |
-| 010_Write_File | Salva entrada do usuário Dentro do Arquivo  | Syscall 8 (creat) |
-| 011_Copy_File | Copia conteúdo de um Arquivo para Outro | --- |
-| 012_Uppercase | Texto de Input em Caixa Alta | Uso dos Macros em Library |
-| 013_Lowercase | Texto de Input em Caixa Baixa | Uso dos Macros em Library |
-| 014_Change_Letter_Case | Texto de Input em Caixa Alta e Baixa | Include da pasta Macro |
-
-
-
+| 001_Nothing | Simple Script | Simple System Call (mov, int) |
+| 002_Output_Msg | Static Text Output | Use of static section (section .data) |
+| 003_Input_Msg | Return user input on the screen | Text Entry Using Buffers (section .bss) |
+| 004_Jump_Flag | Return Even or Odd | Compare (cmp), <br/> Jump (jmp) <br/> and Labels |
+| 005_Subroutines | Return Even or Odd | Subroutine call (call) |
+| 006_Macro_Intern | Return Even or Odd | Macro inside the same file (% macro) |
+| 007_0_Macro_Extern | Return Even or Odd | Macro call external to the file (% include) |
+| 007_1_Macro_Lib | Macro Library | Macro Library called by the Script "007_0_Macro_Extern" |
+| 008_Input_Validation | Sum of Two Numbers | Input Validation using Stack (push, pop) |
+| 009_Open_File | Return File Contents | Syscall 5 (open) |
+| 010_Write_File | Save user input inside the File | Syscall 8 (creat) |
+| 011_Copy_File | Copy data from one file to another | --- |
+| 012_Uppercase | Uppercase Input Text | Using Macros in Library |
+| 013_Lowercase | LowerCase Input Text | Using Macros in Library |
+| 014_Change_Letter_Case | Input Text in Upper and Lower Case | Include from Macro | 
