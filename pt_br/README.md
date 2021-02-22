@@ -1,4 +1,15 @@
 # assembly-nasm-codes
+
+#### Alguns Códigos Assembly x86 usando NASM.
+
+-----
+
+[![NASM Status](https://img.shields.io/badge/NASM-2.14.02-blue)](https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/)
+[![Language Status](https://img.shields.io/badge/Language-pt--BR-success)](https://github.com/GabriOliv/assembly-nasm-codes/blob/main/pt_br/README.md)
+[![Language Status](https://img.shields.io/badge/Language-en-success)](https://github.com/GabriOliv/assembly-nasm-codes/blob/main/README.md)
+
+[NASM Syscall Documentation](https://github.com/GabriOliv/assembly-nasm-codes/blob/main/library/syscall_table.md)
+
 -----
 
 ## Instalação
